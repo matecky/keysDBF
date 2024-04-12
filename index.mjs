@@ -5,8 +5,10 @@ import { assert } from "node:console"
 import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator'
 import pkg from 'obfuscator-io-deobfuscator';
 const { Deobfuscator } = pkg;
+import pkg from 'obfuscator-io-deobfuscator';
+const { defaultConfig } = pkg;
+import { parse, parseExpression } from '@babel/parser';
 
-import { defaultConfig } from 'obfuscator-io-deobfuscator'//from 'obfuscator-io-deobfuscator/deobfuscator/transformations/config';
 
 const checkDeobfs = (x) => x.indexOf("<video />") !== -1
 const dbfConfig = {
@@ -92,16 +94,21 @@ async function getDeobfuscatedScript() {
 
     const scriptUrl = `${vidplayHost}/assets/mcloud/min/embed.js?v=${getCodeVersion()}`
     const obfuscatedScript = await fetch(scriptUrl, {headers: headers}).then(async (x) => await x.text())
-	
+
   //  const firstTry = await deobfuscate(obfuscatedScript);
  //   const firstTry = await deobfuscate(obfuscatedScript);
  //   const firstTryx = await deobfuscate(firstTry);
  //   const secondTry = await dbf(firstTryx);
     const firstTry = deobfuscate(obfuscatedScript .toString(), deobfuscationConfig)
-    const secondTry = dbf(firstTry .toString(),dbfConfig);
+    const ast = parse(firstTry, { sourceType: 'unambiguous' });
+    const deobfuscatorx = new Deobfuscator(ast, { ...defaultConfig, silent: !!options.silent });
+    const output = deobfuscatorx.execute();
 
 	
-    return secondTry
+    //const secondTry = dbf(firstTry .toString(),dbfConfig);
+
+	
+    return output
 }
 
 const deobfuscated = await getDeobfuscatedScript() 
