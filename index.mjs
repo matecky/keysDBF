@@ -6,7 +6,26 @@ import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator'
 
 
 const checkDeobfs = (x) => x.indexOf("<video />") !== -1
-
+const deobfuscationConfig = {
+  verbose: false,
+  arrays: {
+    unpackArrays: true,
+    removeArrays: true,
+  },
+  proxyFunctions: {
+    replaceProxyFunctions: true,
+    removeProxyFunctions: true,
+  },
+  expressions: {
+    simplifyExpressions: true,
+    removeDeadBranches: true,
+  },
+  miscellaneous: {
+    beautify: true,
+    simplifyProperties: true,
+    renameHexIdentifiers: false,
+  },
+};
 // See https://github.com/Claudemirovsky/worstsource-keys/issues/2
 function getCodeVersion() {
     // [hour]:00:10
@@ -35,25 +54,7 @@ async function getDeobfuscatedScript() {
  //   const firstTry = await deobfuscate(obfuscatedScript);
  //   const firstTryx = await deobfuscate(firstTry);
  //   const secondTry = await dbf(firstTryx);
-    const firstTry = await  deobfuscate(obfuscatedScript, {
-        arrays: {
-          unpackArrays: true,
-          removeArrays: true,
-        },
-        proxyFunctions: {
-          replaceProxyFunctions: true,
-          removeProxyFunctions: true,
-        },
-        expressions: {
-          simplifyExpressions: true,
-          removeDeadBranches: true,
-        },
-        miscellaneous: {
-          beautify: true,
-          simplifyProperties: true,
-          renameHexIdentifiers: true,
-        },
-      })
+    const firstTry = deobfuscate(obfuscatedScript, deobfuscationConfig)
 
 
 	
