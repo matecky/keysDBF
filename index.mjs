@@ -32,11 +32,32 @@ async function getDeobfuscatedScript() {
     const obfuscatedScript = await fetch(scriptUrl, {headers: headers}).then(async (x) => await x.text())
 	
   //  const firstTry = await deobfuscate(obfuscatedScript);
-    const firstTry = await deobfuscate(obfuscatedScript);
-    const firstTryx = await deobfuscate(firstTry);
+ //   const firstTry = await deobfuscate(obfuscatedScript);
+ //   const firstTryx = await deobfuscate(firstTry);
  //   const secondTry = await dbf(firstTryx);
+    const firstTry = await  deobfuscate(obfuscatedScript, {
+        arrays: {
+          unpackArrays: true,
+          removeArrays: true,
+        },
+        proxyFunctions: {
+          replaceProxyFunctions: true,
+          removeProxyFunctions: true,
+        },
+        expressions: {
+          simplifyExpressions: true,
+          removeDeadBranches: true,
+        },
+        miscellaneous: {
+          beautify: true,
+          simplifyProperties: true,
+          renameHexIdentifiers: true,
+        },
+      })
 
-    return firstTryx
+
+	
+    return firstTry
 }
 
 const deobfuscated = await getDeobfuscatedScript() 
