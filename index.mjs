@@ -30,8 +30,8 @@ async function getDeobfuscatedScript() {
     const scriptUrl = `${vidplayHost}/assets/mcloud/min/embed.js?v=${getCodeVersion()}`
     const obfuscatedScript = await fetch(scriptUrl, {headers: headers}).then(async (x) => await x.text())
 	
-	const firstTry = await deobfuscate(obfuscatedScript);
-	const secondTry = await dbf(firstTry);
+   // const firstTry = await deobfuscate(obfuscatedScript);
+    const secondTry = await dbf(obfuscatedScript);
 
     return secondTry
 }
