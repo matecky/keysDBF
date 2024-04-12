@@ -97,7 +97,7 @@ async function getDeobfuscatedScript() {
 
 const deobfuscated = await getDeobfuscatedScript() 
 //await writeFile("keys.json", deobfuscated, "utf8")
- Phase 4: Let's find the keys!
+ //Phase 4: Let's find the keys!
 if (checkDeobfs(deobfuscated)) {
     const start = deobfuscated.substring(deobfuscated.indexOf("<video />"))
     const end = start.substring(0, start.indexOf(".replace"))
