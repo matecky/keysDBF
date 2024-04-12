@@ -1,5 +1,5 @@
-//import { deobfuscate } from "js-deobfuscator";
-import { deobfuscate } from "javascript-deobfuscator";
+import { deobfuscate } from "js-deobfuscator";
+//import { deobfuscate } from "javascript-deobfuscator";
 import { writeFile } from "node:fs/promises"
 import { assert } from "node:console"
 import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator'
