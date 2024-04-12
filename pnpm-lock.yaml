@@ -5,6 +5,24 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@babel/generator':
+    specifier: ^7.22.3
+    version: 7.24.4
+  '@babel/parser':
+    specifier: ^7.22.4
+    version: 7.24.4
+  '@babel/traverse':
+    specifier: ^7.22.4
+    version: 7.24.1
+  '@babel/types':
+    specifier: ^7.22.4
+    version: 7.24.0
+  '@types/node':
+    specifier: ^20.2.5
+    version: 20.12.7
+  commander:
+    specifier: ^12.0.0
+    version: 12.0.0
   js-deobfuscator:
     specifier: ^1.0
     version: 1.0.20
