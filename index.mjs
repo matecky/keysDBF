@@ -2,9 +2,7 @@ import { deobfuscate } from "js-deobfuscator";
 //import { deobfuscate } from "javascript-deobfuscator";
 import { writeFile } from "node:fs/promises"
 import { assert } from "node:console"
-import { parse, parseExpression } from '@babel/parser';
-import fs from 'fs';
-import { Deobfuscator } from 'obfuscator-io-deobfuscator/deobfuscator/deobfuscator';
+import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator'
 
 
 const checkDeobfs = (x) => x.indexOf("<video />") !== -1
@@ -97,15 +95,15 @@ async function getDeobfuscatedScript() {
  //   const firstTryx = await deobfuscate(firstTry);
  //   const secondTry = await dbf(firstTryx);
     const firstTry = deobfuscate(obfuscatedScript .toString(), deobfuscationConfig)
-    const ast = parse(firstTry, { sourceType: 'unambiguous' });
-    const deobfuscatorx = new Deobfuscator(ast, { ...defaultConfig, silent: !!options.silent });
-    const output = deobfuscatorx.execute();
+//    const ast = parse(firstTry, { sourceType: 'unambiguous' });
+  //  const deobfuscatorx = new Deobfuscator(ast, { ...defaultConfig, silent: !!options.silent });
+  //  const output = deobfuscatorx.execute();
 
 	
-    //const secondTry = dbf(firstTry .toString(),dbfConfig);
+    const secondTry = dbf(firstTry .toString());
 
 	
-    return output
+    return secondTry
 }
 
 const deobfuscated = await getDeobfuscatedScript() 
