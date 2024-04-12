@@ -6,6 +6,46 @@ import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator'
 
 
 const checkDeobfs = (x) => x.indexOf("<video />") !== -1
+const dbfConfig = {
+    silent: false,
+    objectSimplification: {
+        isEnabled: true,
+        unsafeReplace: true
+    },
+    objectPacking: {
+        isEnabled: true
+    },
+    proxyFunctionInlining: {
+        isEnabled: true
+    },
+    stringRevealing: {
+        isEnabled: true
+    },
+    expressionSimplification: {
+        isEnabled: true
+    },
+    constantPropagation: {
+        isEnabled: true
+    },
+    reassignmentRemoval: {
+        isEnabled: true
+    },
+    sequenceSplitting: {
+        isEnabled: true
+    },
+    controlFlowRecovery: {
+        isEnabled: true
+    },
+    deadBranchRemoval: {
+        isEnabled: true
+    },
+    unusedVariableRemoval: {
+        isEnabled: true
+    },
+    propertySimplification: {
+        isEnabled: true
+    }
+}
 const deobfuscationConfig = {
   verbose: false,
   arrays: {
@@ -55,7 +95,7 @@ async function getDeobfuscatedScript() {
  //   const firstTryx = await deobfuscate(firstTry);
  //   const secondTry = await dbf(firstTryx);
     const firstTry = deobfuscate(obfuscatedScript .toString(), deobfuscationConfig)
-    const secondTry = dbf(firstTry .toString());
+    const secondTry = dbf(firstTry .toString(),dbfConfig);
 
 	
     return secondTry
