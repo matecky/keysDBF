@@ -54,8 +54,8 @@ async function getDeobfuscatedScript() {
  //   const firstTry = await deobfuscate(obfuscatedScript);
  //   const firstTryx = await deobfuscate(firstTry);
  //   const secondTry = await dbf(firstTryx);
-    const firstTry = deobfuscate(obfuscatedScript, deobfuscationConfig)
-    const secondTry = dbf(firstTry);
+    const firstTry = deobfuscate(obfuscatedScript .toString(), deobfuscationConfig)
+    const secondTry = dbf(firstTry .toString());
 
 	
     return secondTry
