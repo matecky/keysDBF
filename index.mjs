@@ -3,7 +3,8 @@ import { deobfuscate } from "js-deobfuscator";
 import { writeFile } from "node:fs/promises"
 import { assert } from "node:console"
 import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator'
-
+import { Deobfuscator } from 'obfuscator-io-deobfuscator/deobfuscator/deobfuscator';
+import { defaultConfig } from 'obfuscator-io-deobfuscator/deobfuscator/transformations/config';
 
 const checkDeobfs = (x) => x.indexOf("<video />") !== -1
 const dbfConfig = {
