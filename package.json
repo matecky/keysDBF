@@ -11,6 +11,7 @@
   "license": "GPL-3.0-only",
   "dependencies": {
     "js-deobfuscator": "^1.0",
-    "obfuscator-io-deobfuscator": "^1.0"
+    "obfuscator-io-deobfuscator": "^1.0",
+	  "javascript-deobfuscator": "^1.0"
   }
 }
