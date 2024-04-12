@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@igor-lemon/javascript-deobfuscator':
+    specifier: ^1.0
+    version: 1.0.8
   javascript-deobfuscator:
     specifier: ^1.0
     version: 1.0.3
@@ -228,6 +231,17 @@ packages:
       colorspace: 1.1.4
       enabled: 2.0.0
       kuler: 2.0.0
+    dev: false
+
+  /@igor-lemon/javascript-deobfuscator@1.0.8:
+    resolution: {integrity: sha512-zNtTLxl/vonn+0ZjY7L7VB6b21p/Za7ePOin4WiFbdtQZb+5fCRGBGuU73BkwJPJRBjDe9qjL4Ds5Gcs2l6zKQ==}
+    dependencies:
+      estraverse: 4.3.0
+      shift-ast: 6.1.0
+      shift-codegen: 7.0.3
+      shift-parser: 7.0.3
+      shift-validator: 5.0.1
+      uuid: 8.3.2
     dev: false
 
   /@jridgewell/gen-mapping@0.3.5:
@@ -618,6 +632,14 @@ packages:
 
   /shift-ast@7.0.0:
     resolution: {integrity: sha512-O0INwsZa1XH/lMSf52udGnjNOxKBLxFiZHt0Ys3i6bqtwuGEA3eDR4+e0qJELIsCy8+BiTtlTgQzP76K1ehipQ==}
+    dev: false
+
+  /shift-codegen@7.0.3:
+    resolution: {integrity: sha512-dfCVVdBF0qZ6pkajQ3bjxRdNEltyxEITVe7tBJkQt2eCI3znUkSxq0VSe/tTWq1LKHeAS4HuOiqYEuHMFkSq9w==}
+    dependencies:
+      esutils: 2.0.3
+      object-assign: 4.1.1
+      shift-reducer: 6.0.0
     dev: false
 
   /shift-parser@7.0.3:
