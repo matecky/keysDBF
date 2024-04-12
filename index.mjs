@@ -1,4 +1,4 @@
-import { deobfuscate } from 'js-deobfuscator/index';
+import { deobfuscate } from "js-deobfuscator";
 import { writeFile } from "node:fs/promises"
 import { assert } from "node:console"
 
