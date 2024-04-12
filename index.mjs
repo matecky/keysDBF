@@ -1,5 +1,5 @@
 //import { deobfuscate } from "js-deobfuscator";
-import { deobfuscate } from "javascript-deobfuscator";
+import { Deobfuscator } from "javascript-deobfuscator";
 import { writeFile } from "node:fs/promises"
 import { assert } from "node:console"
 import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator'
@@ -31,7 +31,9 @@ async function getDeobfuscatedScript() {
     const scriptUrl = `${vidplayHost}/assets/mcloud/min/embed.js?v=${getCodeVersion()}`
     const obfuscatedScript = await fetch(scriptUrl, {headers: headers}).then(async (x) => await x.text())
 	
-    const firstTry = await deobfuscate(obfuscatedScript);
+  //  const firstTry = await deobfuscate(obfuscatedScript);
+    const firstTry = await Deobfuscator(obfuscatedScript);
+	
     const secondTry = await dbf(firstTry);
 
     return secondTry
