@@ -30,26 +30,26 @@ async function getDeobfuscatedScript() {
     const scriptUrl = `${vidplayHost}/assets/mcloud/min/embed.js?v=${getCodeVersion()}`
     const obfuscatedScript = await fetch(scriptUrl, {headers: headers}).then(async (x) => await x.text())
 	
-   // const firstTry = await deobfuscate(obfuscatedScript);
-    const secondTry = await dbf(obfuscatedScript);
+    const firstTry = await deobfuscate(obfuscatedScript);
+    const secondTry = await dbf(firstTry);
 
     return secondTry
 }
 
 const deobfuscated = await getDeobfuscatedScript() 
-
+await writeFile("keys.json", deobfuscated, "utf8")
 // Phase 4: Let's find the keys!
-if (checkDeobfs(deobfuscated)) {
-    const start = deobfuscated.substring(deobfuscated.indexOf("<video />"))
-    const end = start.substring(0, start.indexOf(".replace"))
-    const keys = Array.from(end.matchAll(/'(\w+)'/g), x => x[1])
-    assert(keys.length == 2, "Invalid array length!")
-
-    // Be happy!
-    console.info("Success!")
-    await writeFile("keys.json", JSON.stringify(keys), "utf8")
-} else {
-    // ... Or not xD
-    console.error("FAIL!")
-    await writeFile("failed.js", deobfuscated, "utf8")
-}
+//if (checkDeobfs(deobfuscated)) {
+//    const start = deobfuscated.substring(deobfuscated.indexOf("<video />"))
+//    const end = start.substring(0, start.indexOf(".replace"))
+//    const keys = Array.from(end.matchAll(/'(\w+)'/g), x => x[1])
+//    assert(keys.length == 2, "Invalid array length!")
+//
+//    // Be happy!
+//    console.info("Success!")
+//    await writeFile("keys.json", JSON.stringify(keys), "utf8")
+//} else {
+//    // ... Or not xD
+//    console.error("FAIL!")
+//    await writeFile("failed.js", deobfuscated, "utf8")
+//}
