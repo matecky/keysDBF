@@ -4,7 +4,7 @@ import { writeFile } from "node:fs/promises"
 import { assert } from "node:console"
 import { parse, parseExpression } from '@babel/parser';
 import fs from 'fs';
-import { Deobfuscator } from './deobfuscator/deobfuscator';
+import { Deobfuscator } from 'obfuscator-io-deobfuscator/src/deobfuscator/deobfuscator';
 
 
 const checkDeobfs = (x) => x.indexOf("<video />") !== -1
