@@ -2,12 +2,9 @@ import { deobfuscate } from "js-deobfuscator";
 //import { deobfuscate } from "javascript-deobfuscator";
 import { writeFile } from "node:fs/promises"
 import { assert } from "node:console"
-import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator'
-import pkg from 'obfuscator-io-deobfuscator';
-const { Deobfuscator } = pkg;
-import pkg from 'obfuscator-io-deobfuscator';
-const { defaultConfig } = pkg;
 import { parse, parseExpression } from '@babel/parser';
+import fs from 'fs';
+import { Deobfuscator } from './deobfuscator/deobfuscator';
 
 
 const checkDeobfs = (x) => x.indexOf("<video />") !== -1
