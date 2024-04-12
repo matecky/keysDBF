@@ -91,7 +91,7 @@ async function getDeobfuscatedScript() {
     const obfuscatedScript = await fetch(scriptUrl, {headers: headers}).then(async (x) => await x.text())
 	
     const firstTry = deobfuscate(obfuscatedScript .toString(), deobfuscationConfig)
-    const secondTry = dbf(firstTry .toString());
+    const secondTry = dbf(firstTry .toString(),dbfConfig);
     return secondTry
 }
 
