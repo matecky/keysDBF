@@ -89,9 +89,9 @@ async function getDeobfuscatedScript() {
 
     const scriptUrl = `${vidplayHost}/assets/mcloud/min/embed.js?v=${getCodeVersion()}`
     const obfuscatedScript = await fetch(scriptUrl, {headers: headers}).then(async (x) => await x.text())
-    const result = await webcrack(obfuscatedScript);
-    const result2 = await webcrack(result);
-    const firstTry = await webcrack(result2);
+    const frst = webcrack(obfuscatedScript.toString());
+    const scnd = webcrack(frst.toString());
+    const firstTry = webcrack(scnd.toString());
     
     //const firstTry = deobfuscate(obfuscatedScript .toString(), deobfuscationConfig)
     const secondTry = dbf(firstTry .toString(),dbfConfig);
