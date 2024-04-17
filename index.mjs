@@ -1,8 +1,8 @@
-import { deobfuscate } from "js-deobfuscator";
-//import { deobfuscate } from "javascript-deobfuscator";
-import { writeFile } from "node:fs/promises"
-import { assert } from "node:console"
-import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator'
+//import { deobfuscate } from "js-deobfuscator";
+import { webcrack } from "webcrack";
+import { writeFile } from "node:fs/promises";
+import { assert } from "node:console";
+import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator';
 
 
 const checkDeobfs = (x) => x.indexOf("<video />") !== -1
@@ -89,8 +89,11 @@ async function getDeobfuscatedScript() {
 
     const scriptUrl = `${vidplayHost}/assets/mcloud/min/embed.js?v=${getCodeVersion()}`
     const obfuscatedScript = await fetch(scriptUrl, {headers: headers}).then(async (x) => await x.text())
-	
-    const firstTry = deobfuscate(obfuscatedScript .toString(), deobfuscationConfig)
+    const result = await webcrack(obfuscatedScript);
+    const result2 = await webcrack(result);
+    const firstTry = await webcrack(result2);
+    
+    //const firstTry = deobfuscate(obfuscatedScript .toString(), deobfuscationConfig)
     const secondTry = dbf(firstTry .toString(),dbfConfig);
     return secondTry
 }
@@ -112,4 +115,3 @@ if (checkDeobfs(deobfuscated)) {
     console.error("FAIL!")
     await writeFile("failed.js", deobfuscated, "utf8")
 }
-
