@@ -1,4 +1,4 @@
-//import { deobfuscate } from "js-deobfuscator";
+import { deobfuscate } from "js-deobfuscator";
 import { webcrack } from "webcrack";
 import { writeFile } from "node:fs/promises";
 import { assert } from "node:console";
