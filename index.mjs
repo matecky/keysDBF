@@ -108,13 +108,7 @@ function getCodeVersion() {
     const timestamp = versionDate.getTime().toString().substring(0, 10)
     return parseInt(timestamp).toString(16) // Convert to HEX
 }
-async function deobfuscationChain(obfuscatedScript, deobfsSteps) {
-    let deobfs = obfuscatedScript
-    for(const func of deobfsSteps) {
-        deobfs = await deobfuscationLoop(deobfs, func)
-    }
-    return deobfs
-}
+
 
 async function getDeobfuscatedScript() {
 //    const vidplayHost = "https://vidplay.lol"
