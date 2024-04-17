@@ -3,6 +3,32 @@ import { webcrack } from "webcrack";
 import { writeFile } from "node:fs/promises";
 import { assert } from "node:console";
 import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator';
+async function deobfuscationLoop(obfuscatedInput, loopFunction) {
+    let deobfuscated = obfuscatedInput
+    for (let run = 0; run < 5; run++) {
+        try {
+            const result = await loopFunction(deobfuscated)
+            if (result == "" || result == undefined) break
+            deobfuscated = result
+        } catch (e) {
+            console.error(e)
+            break
+        }
+    }
+    return deobfuscated
+}
+
+async function deobfuscationChain(obfuscatedScript, deobfsSteps) {
+    let deobfs = obfuscatedScript
+    for(const func of deobfsSteps) {
+        deobfs = await deobfuscationLoop(deobfs, func)
+    }
+    return deobfs
+}
+
+
+
+
 
 
 const checkDeobfs = (x) => x.indexOf("<video />") !== -1
@@ -66,7 +92,13 @@ const deobfuscationConfig = {
     renameHexIdentifiers: false,
   },
 };
+
+const webcrackStep = async (x) => await webcrack(x).code
+
+
+
 // See https://github.com/Claudemirovsky/worstsource-keys/issues/2
+
 function getCodeVersion() {
     // [hour]:00:10
     const versionDate = new Date()
@@ -75,6 +107,13 @@ function getCodeVersion() {
     // Get only the first 10 digits
     const timestamp = versionDate.getTime().toString().substring(0, 10)
     return parseInt(timestamp).toString(16) // Convert to HEX
+}
+async function deobfuscationChain(obfuscatedScript, deobfsSteps) {
+    let deobfs = obfuscatedScript
+    for(const func of deobfsSteps) {
+        deobfs = await deobfuscationLoop(deobfs, func)
+    }
+    return deobfs
 }
 
 async function getDeobfuscatedScript() {
@@ -89,9 +128,13 @@ async function getDeobfuscatedScript() {
 
     const scriptUrl = `${vidplayHost}/assets/mcloud/min/embed.js?v=${getCodeVersion()}`
     const obfuscatedScript = await fetch(scriptUrl, {headers: headers}).then(async (x) => await x.text())
-    const frst = webcrack(obfuscatedScript.toString());
-    const scnd = webcrack(frst.toString());
-    const firstTry = webcrack(scnd.toString());
+	
+    const firstTry = await deobfuscationChain(obfuscatedScript, [webcrackStep, webcrackStep,webcrackStep])
+	
+	
+    //const result = await webcrack(obfuscatedScript);
+   // const result2 = await webcrack(result);
+   // const firstTry = await webcrack(result2);
     
     //const firstTry = deobfuscate(obfuscatedScript .toString(), deobfuscationConfig)
     const secondTry = dbf(firstTry .toString(),dbfConfig);
