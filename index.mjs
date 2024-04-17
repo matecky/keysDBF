@@ -3,28 +3,6 @@ import { webcrack } from "webcrack";
 import { writeFile } from "node:fs/promises";
 import { assert } from "node:console";
 import { deobfuscate as dbf} from 'obfuscator-io-deobfuscator';
-async function deobfuscationLoop(obfuscatedInput, loopFunction) {
-    let deobfuscated = obfuscatedInput
-    for (let run = 0; run < 5; run++) {
-        try {
-            const result = await loopFunction(deobfuscated)
-            if (result == "" || result == undefined) break
-            deobfuscated = result
-        } catch (e) {
-            console.error(e)
-            break
-        }
-    }
-    return deobfuscated
-}
-
-async function deobfuscationChain(obfuscatedScript, deobfsSteps) {
-    let deobfs = obfuscatedScript
-    for(const func of deobfsSteps) {
-        deobfs = await deobfuscationLoop(deobfs, func)
-    }
-    return deobfs
-}
 
 
 
@@ -93,9 +71,6 @@ const deobfuscationConfig = {
   },
 };
 
-const webcrackStep = async (x) => await webcrack(x).code
-
-
 
 // See https://github.com/Claudemirovsky/worstsource-keys/issues/2
 
@@ -122,8 +97,11 @@ async function getDeobfuscatedScript() {
 
     const scriptUrl = `${vidplayHost}/assets/mcloud/min/embed.js?v=${getCodeVersion()}`
     const obfuscatedScript = await fetch(scriptUrl, {headers: headers}).then(async (x) => await x.text())
-	
-    const firstTry = await deobfuscationChain(obfuscatedScript, [webcrackStep, webcrackStep,webcrackStep])
+    const resx = await webcrack(obfuscatedScript, { unpack: true });
+    const resxx = await webcrack(resx, { unpack: true });
+    const firstTry = await webcrack(resxx, { unpack: true });
+//resx = await webcrack(code, { unpack: true });
+//    const firstTry = await deobfuscationChain(obfuscatedScript, [webcrackStep, webcrackStep,webcrackStep])
 	
 	
     //const result = await webcrack(obfuscatedScript);
