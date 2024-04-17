@@ -12,6 +12,6 @@
   "dependencies": {
     "js-deobfuscator": "^1.0",
     "obfuscator-io-deobfuscator": "github:matecky/dbf",
-    "webcrack": "^1.0"
+    "webcrack": "^2.11.0"
   }
 }
