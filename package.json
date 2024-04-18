@@ -11,7 +11,7 @@
   "license": "GPL-3.0-only",
   "dependencies": {
     "js-deobfuscator": "^1.0",
-    "webcrack": "github:matecky/wbcrx",
+    "webcrack": "2.13.0",
     "obfuscator-io-deobfuscator": "github:matecky/dbf"
   }
 }
