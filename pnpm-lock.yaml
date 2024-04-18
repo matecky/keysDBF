@@ -12,8 +12,8 @@ dependencies:
     specifier: github:matecky/dbf
     version: github.com/matecky/dbf/0dc274d1a08f132939d4050d77f9ff9e74d5bf2f
   webcrack:
-    specifier: github:matecky/wbcrx
-    version: github.com/matecky/wbcrx/cecd0dabc66f41a5dea8a3a8a5a757e6ac08d7b2
+    specifier: 2.13.0
+    version: 2.13.0
 
 packages:
 
@@ -796,6 +796,25 @@ packages:
     hasBin: true
     dev: false
 
+  /webcrack@2.13.0:
+    resolution: {integrity: sha512-+YCR1zdj2ucVAandKjU6niRJHbuZafu1vd71eoKCRmFqmWob3+FkujREHny6PfLb8G0HJpXNDhoGKiXHNxcFsA==}
+    hasBin: true
+    dependencies:
+      '@babel/generator': 7.24.4
+      '@babel/helper-validator-identifier': 7.22.20
+      '@babel/parser': 7.24.4
+      '@babel/template': 7.24.0
+      '@babel/traverse': 7.24.1
+      '@babel/types': 7.24.0
+      '@codemod/matchers': 1.7.1
+      babel-plugin-minify-mangle-names: 0.5.1
+      commander: 11.1.0
+      debug: 4.3.4
+      isolated-vm: 4.7.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: false
@@ -831,27 +850,6 @@ packages:
       '@babel/types': 7.24.0
       '@types/node': 20.12.7
       commander: 12.0.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  github.com/matecky/wbcrx/cecd0dabc66f41a5dea8a3a8a5a757e6ac08d7b2:
-    resolution: {tarball: https://codeload.github.com/matecky/wbcrx/tar.gz/cecd0dabc66f41a5dea8a3a8a5a757e6ac08d7b2}
-    name: webcrack
-    version: 2.13.0
-    hasBin: true
-    dependencies:
-      '@babel/generator': 7.24.4
-      '@babel/helper-validator-identifier': 7.22.20
-      '@babel/parser': 7.24.4
-      '@babel/template': 7.24.0
-      '@babel/traverse': 7.24.1
-      '@babel/types': 7.24.0
-      '@codemod/matchers': 1.7.1
-      babel-plugin-minify-mangle-names: 0.5.1
-      commander: 11.1.0
-      debug: 4.3.4
-      isolated-vm: 4.7.2
     transitivePeerDependencies:
       - supports-color
     dev: false
